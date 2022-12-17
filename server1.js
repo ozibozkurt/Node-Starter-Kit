@@ -49,3 +49,11 @@ app.get("/characters", (req, res) => {
   res.json(characters);
 });
 
+app.get("/characters/:id", (req, res) => {
+  const characterId = parseInt(req.params.id);
+  res.json(data.find((c) => c.id === characterId));
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
