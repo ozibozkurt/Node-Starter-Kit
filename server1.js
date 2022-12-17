@@ -24,35 +24,4 @@ This API should include:
 */
 
 // import express
-const express = require("express");
-const fs = require("fs");
 
-// create a new express api
-const app = express();
-
-const port = 5000;
-
-const data = JSON.parse(fs.readFileSync("data.json", "utf-8"));
-
-app.get("/characters", (req, res) => {
-  let characters = data;
-
-  if (req.query.name) {
-    characters = characters.filter((c) => c.name === req.query.name);
-  }
-
-  if (req.query.house) {
-    characters = characters.filter((c) => c.house === req.query.house);
-  }
-
-  res.json(characters);
-});
-
-app.get("/characters/:id", (req, res) => {
-  const characterId = parseInt(req.params.id);
-  res.json(data.find((c) => c.id === characterId));
-});
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
